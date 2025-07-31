@@ -7,7 +7,7 @@ public class Operateur extends Bouton {
 
     @Override
     public void faitSurClique() {
-        if (getEcranCible().getAffichage().split(" ").length >= 3) {
+        if (getEcranCible().getAffichage().trim().split("\\s+").length >= 3) {
             getEcranCible().faireCalcul();
             getEcranCible().ajouteAffichage(getSymbol());
         } else {
