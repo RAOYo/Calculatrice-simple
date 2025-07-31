@@ -12,7 +12,7 @@ public class BoutonDel extends Operateur {
                 getEcranCible().getAffichage().contains("NaN"))) {
             int limit = getEcranCible().getAffichage().length() - 1;
 
-            if (getEcranCible().getAffichage().length() >= 2 && getEcranCible().getAffichage()[limit] == " ") {
+            if (getEcranCible().getAffichage().length() >= 2 && getEcranCible().getAffichage().substring(limit).equals(" ")) {
                 limit--;
             }
             getEcranCible().setAffichage(getEcranCible().getAffichage().substring(0, limit));
