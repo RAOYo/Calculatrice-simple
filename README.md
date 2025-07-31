@@ -5,7 +5,7 @@ C'est une calculette toute simple qui permet de realiser des calculs aves les op
 
 ## Installation  
 -Cloner le repo
--Pour compiler avec le terminal, vous pouvez utiliser javac -d [directory] */*.java
+-Pour compiler avec le terminal, vous pouvez utiliser javac -d [directory] \*/\*.java
 -Pour executer utilisez la commande java -cp [directory] affichage.Main
 
 ## Usage  
