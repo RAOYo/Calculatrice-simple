@@ -48,7 +48,7 @@ public class Ecran extends JPanel {
     }
 
     public void faireCalcul() {
-        String[]    partition = affichage.split(" ");
+        String[]    partition = affichage.trim().split("\\s+");
 
         switch (partition.length) {
             case 3:
