@@ -9,10 +9,8 @@ public class Operateur extends Bouton {
     public void faitSurClique() {
         if (getEcranCible().getAffichage().trim().split("\\s+").length >= 3) {
             getEcranCible().faireCalcul();
-            getEcranCible().ajouteAffichage(getSymbol());
-        } else {
-            getEcranCible().ajouteAffichage(getSymbol());
         }
+        getEcranCible().ajouteAffichage(getSymbol());
         getEcranCible().refresh();
     }
 }
