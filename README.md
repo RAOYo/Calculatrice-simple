@@ -1,7 +1,7 @@
 # Calculatrice-simple
 
 ## Description  
-C'est une calculette toute simple qui permet de realiser des calculs aves les opérations de base.
+C'est une calculette toute simple qui permet de realiser des calculs aves des opérations de base.
 
 ## Installation  
 -Cloner le repo
