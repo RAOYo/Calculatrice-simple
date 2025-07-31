@@ -15,34 +15,17 @@ public class Clavier extends JPanel {
 
     public Clavier(Ecran ecran, int width, int height) {
         JPanel  console = new JPanel();
-        JPanel  partieChiffre = new JPanel();
-        JPanel  partieOperateur = new JPanel();
 
         creeTabBoutonChiffre(ecran);
         creeTabBoutonOperation(ecran);
-        activeBoutons();
+        activeBoutons(boutonChiffre);
+        activeBoutons(boutonOperation);
 
         console.setPreferredSize(new Dimension(width - 10, height - 10));
         console.setLayout(new BorderLayout());
 
-        partieChiffre.setLayout(new GridLayout(4, 3));
-        partieChiffre.setPreferredSize(new Dimension((int)((3 * width) / 4), height));
-
-        partieOperateur.setLayout(new GridLayout(4, 2));
-        partieChiffre.setPreferredSize(new Dimension((int)(width / 4), height));
-
-        for (int i = boutonChiffre.length - 1; i >= 0; i--) {
-            partieChiffre.add(boutonChiffre[i]);
-            boutonChiffre[i].setFont(new Font("Segoe UI", Font.BOLD, 15));
-        }
-
-        for (int i = 0; i < boutonOperation.length; i++) {
-            partieOperateur.add(boutonOperation[i]);
-            boutonOperation[i].setFont(new Font("Segoe UI", Font.BOLD, 15));
-        }
-
-        console.add(partieChiffre, BorderLayout.CENTER);
-        console.add(partieOperateur, BorderLayout.EAST);
+        console.add(manageBoutons(boutonChiffre, (int)((6 * width) / 10), height, 4, 3), BorderLayout.CENTER);
+        console.add(manageBoutons(boutonOperation, (int)(4 * width / 10), height, 4, 2), BorderLayout.EAST);
 
         setBackground(new Color(198, 231, 253));
         setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -50,16 +33,18 @@ public class Clavier extends JPanel {
     }
 
     public void creeTabBoutonChiffre(Ecran ecran) {
+        int j = 0;
+
         boutonChiffre = new Bouton[12];
 
         // Chiffres de 0 - 9
-        for (int i = 2; i < 12; i++) {
-            boutonChiffre[i] = new Bouton("" + (i - 2), ecran);
+        for (int i = 9; i >= 0; i--) {
+            boutonChiffre[i] = new Bouton("" + (j++), ecran);
         }
 
         // extensions de bouton chiffre
-        boutonChiffre[0] = new Bouton(".", ecran);
-        boutonChiffre[1] = new Bouton("00", ecran);
+        boutonChiffre[10] = new Bouton("00", ecran);
+        boutonChiffre[11] = new Bouton(".", ecran);
     }
 
     public void creeTabBoutonOperation(Ecran ecran) {
@@ -78,21 +63,25 @@ public class Clavier extends JPanel {
         boutonOperation[7] = new BoutonDel(ecran);
     }
 
-    public void activeBoutons() {
-        for (int i = 0; i < boutonChiffre.length; i++) {
-            Bouton  b = boutonChiffre[i];
+    public void activeBoutons(Bouton[] boutonTab) {
+        for (Bouton b : boutonTab) {
             b.addActionListener( e -> {
                 b.faitSurClique();
                 System.out.println(b.getEcranCible().getAffichage());
             });
         }
+    }
 
-        for (int i = 0; i < boutonOperation.length; i++) {
-            Operateur   o = boutonOperation[i];
-            o.addActionListener( e -> {
-                o.faitSurClique();
-                System.out.println(o.getEcranCible().getAffichage());
-            });
+    public JPanel manageBoutons(Bouton[] boutonTab, int width, int height, int row, int col) {
+        JPanel  panel = new JPanel();
+
+        panel.setLayout(new GridLayout(row, col));
+        panel.setPreferredSize(new Dimension(width, height));
+
+        for (Bouton b : boutonTab) {
+            panel.add(b);
+            b.setFont(new Font("Segoe UI", Font.BOLD, 15));
         }
+        return panel;
     }
 }
