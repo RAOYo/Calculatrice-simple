@@ -11,7 +11,11 @@ public class BoutonDel extends Operateur {
                 !(getEcranCible().getAffichage().contains("Syntax Error") || getEcranCible().getAffichage().contains("Infinity") ||
                 getEcranCible().getAffichage().contains("NaN"))) {
             int limit = getEcranCible().getAffichage().length() - 1;
-            getEcranCible().setAffichage(getEcranCible().getAffichage().trim().substring(0, limit));
+
+            if (getEcranCible().getAffichage().length() >= 2 && getEcranCible().getAffichage()[limit] == " ") {
+                limit--;
+            }
+            getEcranCible().setAffichage(getEcranCible().getAffichage().substring(0, limit));
             getEcranCible().refresh();
         }
     }
